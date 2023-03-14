@@ -1,0 +1,347 @@
+CREATE TABLE USERS(
+    USER_ID NUMBER,
+    FIRST_NAME VARCHAR2(100) NOT NULL,
+    LAST_NAME VARCHAR2(100) NOT NULL,
+    YEAR_OF_BIRTH INTEGER,
+    MONTH_OF_BIRTH INTEGER,
+    DAY_OF_BIRTH INTEGER,
+    GENDER VARCHAR2(100),
+    PRIMARY KEY (USER_ID)
+);
+
+CREATE TABLE FRIENDS(
+    USER1_ID NUMBER,
+    USER2_ID NUMBER,
+    PRIMARY KEY (USER1_ID, USER2_ID),
+    FOREIGN KEY (USER1_ID) REFERENCES USERS(USER_ID) ON DELETE CASCADE,
+    FOREIGN KEY (USER2_ID) REFERENCES USERS(USER_ID) ON DELETE CASCADE,
+    CHECK (USER1_ID != USER2_ID)
+);
+
+CREATE TRIGGER order_friends_pairs
+--  make sure incoming pairs are ordered thus unique in the table
+    BEFORE INSERT ON FRIENDS
+    FOR EACH ROW
+        DECLARE temp NUMBER;
+        BEGIN
+            IF :NEW.USER1_ID > :NEW.USER2_ID THEN
+                temp := :NEW.USER2_ID;
+                :NEW.USER2_ID := :NEW.USER1_ID;
+                :NEW.USER1_ID := temp;
+            END IF;
+        END;
+/
+
+CREATE TABLE CITIES(
+    CITY_ID INTEGER,
+    CITY_NAME VARCHAR2(100) NOT NULL,
+    STATE_NAME VARCHAR2(100) NOT NULL,
+    COUNTRY_NAME VARCHAR2(100) NOT NULL,
+    PRIMARY KEY (CITY_ID),
+    UNIQUE (CITY_NAME, STATE_NAME, COUNTRY_NAME)
+);
+
+CREATE SEQUENCE city
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TRIGGER city_id_generate
+    BEFORE INSERT ON CITIES
+    FOR EACH ROW
+    BEGIN
+        SELECT city.NEXTVAL INTO :NEW.CITY_ID FROM DUAL;
+    END;
+/
+
+CREATE TABLE USER_CURRENT_CITIES(
+    USER_ID NUMBER,
+    CURRENT_CITY_ID INTEGER NOT NULL,
+    PRIMARY KEY (USER_ID),
+    FOREIGN KEY (USER_ID) REFERENCES USERS ON DELETE CASCADE,
+    FOREIGN KEY (CURRENT_CITY_ID) REFERENCES CITIES(CITY_ID)
+);
+
+CREATE TABLE USER_HOMETOWN_CITIES(
+    USER_ID NUMBER,
+    HOMETOWN_CITY_ID INTEGER NOT NULL,
+    PRIMARY KEY (USER_ID),
+    FOREIGN KEY (USER_ID) REFERENCES USERS ON DELETE CASCADE ,
+    FOREIGN KEY (HOMETOWN_CITY_ID) REFERENCES CITIES(CITY_ID)
+);
+
+CREATE TABLE MESSAGES(
+    MESSAGE_ID NUMBER,
+    SENDER_ID NUMBER NOT NULL,
+    RECEIVER_ID NUMBER NOT NULL,
+    MESSAGE_CONTENT VARCHAR2(2000) NOT NULL,
+    SENT_TIME TIMESTAMP NOT NULL,
+    PRIMARY KEY (MESSAGE_ID),
+    FOREIGN KEY (SENDER_ID) REFERENCES USERS(USER_ID) ON DELETE CASCADE,
+    FOREIGN KEY (RECEIVER_ID) REFERENCES USERS(USER_ID) ON DELETE CASCADE
+);
+
+CREATE SEQUENCE message
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TRIGGER message_id_generate
+    BEFORE INSERT ON MESSAGES
+    FOR EACH ROW
+    BEGIN
+        SELECT message.NEXTVAL INTO :NEW.MESSAGE_ID FROM DUAL;
+    END;
+/
+
+CREATE TABLE PROGRAMS(
+    PROGRAM_ID INTEGER,
+    INSTITUTION VARCHAR2(100) NOT NULL,
+    CONCENTRATION VARCHAR2(100) NOT NULL,
+    DEGREE VARCHAR2(100) NOT NULL,
+    PRIMARY KEY (PROGRAM_ID),
+    UNIQUE (INSTITUTION, CONCENTRATION, DEGREE)
+);
+
+CREATE SEQUENCE program
+START WITH 1
+INCREMENT BY 1;
+
+CREATE TRIGGER program_id_generate
+    BEFORE INSERT ON PROGRAMS
+    FOR EACH ROW
+    BEGIN
+        SELECT program.NEXTVAL INTO :NEW.PROGRAM_ID FROM DUAL;
+    END;
+/
+
+CREATE TABLE EDUCATION(
+    USER_ID INTEGER NOT NULL ,
+    PROGRAM_ID INTEGER NOT NULL,
+    PROGRAM_YEAR INTEGER NOT NULL,
+    PRIMARY KEY (USER_ID, PROGRAM_ID),
+    FOREIGN KEY (USER_ID) REFERENCES USERS ON DELETE CASCADE,
+    FOREIGN KEY (PROGRAM_ID) REFERENCES PROGRAMS
+);
+
+CREATE TABLE USER_EVENTS(
+    EVENT_ID NUMBER,
+    EVENT_CREATOR_ID NUMBER NOT NULL,
+    EVENT_NAME VARCHAR2(100) NOT NULL,
+    EVENT_TAGLINE VARCHAR2(100),
+    EVENT_DESCRIPTION VARCHAR2(100),
+    EVENT_HOST VARCHAR2(100),
+    EVENT_TYPE VARCHAR2(100),
+    EVENT_SUBTYPE VARCHAR2(100),
+    EVENT_ADDRESS VARCHAR2(100),
+    EVENT_CITY_ID INTEGER NOT NULL,
+    EVENT_START_TIME TIMESTAMP,
+    EVENT_END_TIME TIMESTAMP,
+    PRIMARY KEY (EVENT_ID),
+    FOREIGN KEY (EVENT_CREATOR_ID) REFERENCES USERS(USER_ID),
+    FOREIGN KEY (EVENT_CITY_ID) REFERENCES CITIES(CITY_ID)
+ );
+
+CREATE TABLE PARTICIPANTS(
+    EVENT_ID NUMBER NOT NULL,
+    USER_ID NUMBER NOT NULL,
+    CONFIRMATION VARCHAR2(100) NOT NULL,
+    PRIMARY KEY (EVENT_ID, USER_ID),
+    FOREIGN KEY (EVENT_ID) REFERENCES USER_EVENTS ON DELETE CASCADE,
+    FOREIGN KEY (USER_ID) REFERENCES USERS ON DELETE CASCADE,
+    CHECK (CONFIRMATION = 'ATTENDING' OR CONFIRMATION = 'UNSURE' OR CONFIRMATION = 'DECLINES' OR CONFIRMATION = 'NOT_REPLIED')
+);
+
+
+CREATE TABLE ALBUMS(
+    ALBUM_ID NUMBER,
+    ALBUM_OWNER_ID NUMBER NOT NULL,
+    ALBUM_NAME VARCHAR2(100) NOT NULL,
+    ALBUM_CREATED_TIME TIMESTAMP NOT NULL,
+    ALBUM_MODIFIED_TIME TIMESTAMP,
+    ALBUM_LINK VARCHAR2(100) NOT NULL,
+    ALBUM_VISIBILITY VARCHAR2(100) NOT NULL,
+    COVER_PHOTO_ID NUMBER NOT NULL,
+    PRIMARY KEY (ALBUM_ID),
+    FOREIGN KEY (ALBUM_OWNER_ID) REFERENCES USERS(USER_ID) ON DELETE CASCADE,
+    CHECK(ALBUM_VISIBILITY = 'EVERYONE' OR ALBUM_VISIBILITY = 'FRIENDS' OR ALBUM_VISIBILITY = 'FRIENDS_OF_FRIENDS' OR ALBUM_VISIBILITY = 'MYSELF')
+);
+
+
+CREATE TABLE PHOTOS(
+    PHOTO_ID NUMBER,
+    ALBUM_ID NUMBER NOT NULL,
+    PHOTO_CAPTION VARCHAR2(100),
+    PHOTO_CREATED_TIME TIMESTAMP NOT NULL,
+    PHOTO_MODIFIED_TIME TIMESTAMP,
+    PHOTO_LINK VARCHAR2(2000) NOT NULL,
+    PRIMARY KEY (PHOTO_ID)
+);
+
+
+ALTER TABLE ALBUMS ADD CONSTRAINT fk1
+    FOREIGN KEY (COVER_PHOTO_ID) REFERENCES PHOTOS(PHOTO_ID)
+INITIALLY DEFERRED DEFERRABLE ;
+
+ALTER TABLE PHOTOS ADD CONSTRAINT fk2
+    FOREIGN KEY (ALBUM_ID) REFERENCES ALBUMS ON DELETE CASCADE
+INITIALLY DEFERRED DEFERRABLE ;
+
+CREATE TABLE TAGS(
+    TAG_PHOTO_ID NUMBER NOT NULL,
+    TAG_SUBJECT_ID NUMBER NOT NULL,
+    TAG_CREATED_TIME TIMESTAMP NOT NULL,
+    TAG_X NUMBER NOT NULL,
+    TAG_Y NUMBER  NOT NULL,
+    PRIMARY KEY (TAG_PHOTO_ID, TAG_SUBJECT_ID),
+    FOREIGN KEY (TAG_PHOTO_ID) REFERENCES PHOTOS(PHOTO_ID) ON DELETE CASCADE,
+    FOREIGN KEY (TAG_SUBJECT_ID) REFERENCES USERS(USER_ID) ON DELETE CASCADE
+);
+
+-- Q1
+create view first_name_length as
+select length(u.FIRST_NAME) as LengthOfFirstName, u.FIRST_NAME
+from USERS u;
+
+select distinct f.FIRST_NAME
+from first_name_length f
+where f.LengthOfFirstName = (
+    select max(f2.LengthOfFirstName)
+    from first_name_length f2
+    )
+order by f.FIRST_NAME;
+
+select distinct f.FIRST_NAME
+from first_name_length f
+where f.LengthOfFirstName = (
+    select min(f2.LengthOfFirstName)
+    from first_name_length f2
+    )
+order by f.FIRST_NAME;
+
+create view name_times as
+select count (*) as times, u.FIRST_NAME
+from USERS u
+group by u.FIRST_NAME
+order by times desc, u.FIRST_NAME;
+
+select max(nt.times)
+from name_times nt;
+
+select nt.FIRST_NAME
+from name_times nt
+where nt.times = (
+select max(nt.times)
+from name_times nt
+    );
+
+drop view first_name_length;
+drop view name_times;
+
+-- Q2 pay attention to empty
+select U.USER_ID, u.FIRST_NAME, u.LAST_NAME
+from USERS u
+where u.USER_ID not in (select f.USER1_ID from FRIENDS f)
+  and u.USER_ID not in (select f.USER2_ID from FRIENDS f)
+order by u.USER_ID;
+
+-- Q3 empty
+create view qualified_user as
+select u.USER_ID, ucc.CURRENT_CITY_ID as cur, uhc.HOMETOWN_CITY_ID as home
+from USERS u, USER_CURRENT_CITIES ucc, USER_HOMETOWN_CITIES uhc
+where u.USER_ID = ucc.USER_ID and u.USER_ID = uhc.USER_ID
+minus
+select u.USER_ID, ucc.CURRENT_CITY_ID cur, ucc.CURRENT_CITY_ID as home
+from USERS u, USER_CURRENT_CITIES ucc
+where u.USER_ID = ucc.USER_ID;
+
+select u.USER_ID, u.FIRST_NAME, u.LAST_NAME
+from USERS u
+where u.USER_ID in (
+    select q.USER_ID
+    from qualified_user q
+    )
+order by u.USER_ID;
+
+drop view qualified_user;
+
+-- Q4
+select selected_photo.PHOTO_ID, selected_photo.ALBUM_ID, selected_photo.PHOTO_LINK, selected_photo.ALBUM_NAME
+from  (
+    select count(*) as times, p.PHOTO_ID, p.PHOTO_LINK, p.ALBUM_ID, a.ALBUM_NAME
+    from PHOTOS p, TAGS t, ALBUMS a
+    where p.PHOTO_ID = t.TAG_PHOTO_ID and p.ALBUM_ID = a.ALBUM_ID
+    group by p.PHOTO_ID
+    order by times desc, p.PHOTO_ID
+    )selected_photo
+where ROWNUM <= 10;
+
+select s.PHOTO_ID, p.PHOTO_LINK, p.ALBUM_ID, a.ALBUM_NAME
+from selected_photo s, PHOTOS p, ALBUMS a
+where s.PHOTO_ID = p.PHOTO_ID and p.ALBUM_ID = a.ALBUM_ID;
+
+select u.USER_ID, u.FIRST_NAME, u.LAST_NAME
+from selected_photo s, TAGS t, USERS u
+where s.PHOTO_ID = t.TAG_PHOTO_ID and t.TAG_SUBJECT_ID = u.USER_ID
+order by u.USER_ID;
+
+drop view selected_photo;
+
+-- Q5
+create view not_friend as
+select u1.USER_ID as USER1_ID, u2.USER_ID as USER2_ID
+from USERS u1, USERS u2
+where u1.USER_ID < u2.USER_ID and u1.GENDER = u2.GENDER
+  and (u1.YEAR_OF_BIRTH-u2.YEAR_OF_BIRTH <= 5 or u2.YEAR_OF_BIRTH-u1.YEAR_OF_BIRTH <= 5)
+minus
+select f.USER1_ID, f.USER2_ID
+from FRIENDS f;
+
+create view selected as
+select distinct nf.USER1_ID, nf.USER2_ID, t1.TAG_PHOTO_ID
+from not_friend nf, TAGS t1, TAGS t2
+where nf.USER1_ID = t1.TAG_SUBJECT_ID and nf.USER2_ID = t2.TAG_SUBJECT_ID
+  and t1.TAG_PHOTO_ID = t2.TAG_PHOTO_ID;
+
+create view selected_pair as
+select temp.USER1_ID, temp.USER2_ID from (
+        select s.USER1_ID, s.USER2_ID, count(*) as common_tags
+       from selected s
+       group by (s.USER1_ID, s.USER2_ID)
+       order by common_tags
+        ) temp
+where ROWNUM <= 5;
+
+select u1.USER_ID, u2.USER_ID, u1.FIRST_NAME, u2.FIRST_NAME, u1.LAST_NAME, u2.LAST_NAME, u1.YEAR_OF_BIRTH, u2.YEAR_OF_BIRTH
+from selected_pair sp, USERS u1, USERS u2
+where sp.USER1_ID = u1.USER_ID and sp.USER2_ID = u2.USER_ID
+order by u1.USER_ID, u2.USER_ID;
+
+select s.TAG_PHOTO_ID, p.PHOTO_LINK, p.ALBUM_ID, a.ALBUM_NAME
+from selected_pair sp, selected s, PHOTOS p, ALBUMS a
+where sp.USER1_ID = s.USER1_ID and sp.USER2_ID = sp.USER2_ID and s.TAG_PHOTO_ID = p.PHOTO_ID
+  and p.ALBUM_ID = a.ALBUM_ID
+order by s.TAG_PHOTO_ID;
+
+drop view not_friend;
+drop view selected;
+drop view selected_pair;
+
+
+create view aug_friend as
+    select f.user1_id, f.user2_id from project2.PUBLIC_FRIENDS f
+        union
+    select f.user2_id, f.user1_id from project2.PUBLIC_FRIENDS f;
+
+--create view temp as
+select * from (
+select user1, user2 from
+(select f1.user2_id as user1, f2.user2_id as user2, f1.user1_id as mutual
+from aug_friend f1, aug_friend f2
+where f1.user2_id<f2.user2_id and f1.user1_id=f2.user1_id
+minus
+select f.user1_id as user1, f.user2_id as user2, u.user_id as mutual
+from project2.PUBLIC_Friends f, project2.PUBLIC_Users u)
+group by user1, user2
+order by count(*) desc, user1, user2)
+where ROWNUM <= 5;
+
+drop view aug_friend;

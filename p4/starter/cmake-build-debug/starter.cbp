@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="starter"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="starter">
+				<Option output="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/starter.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/."/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 starter"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="starter/fast">
+				<Option output="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/starter.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/."/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed"/>
+					<Add directory="C:/Program Files/JetBrains/x86_64-8.1.0-release-posix-sjlj-rt_v6-rev0/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/8.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 starter/fast"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/PROGRA~1/JETBRA~1/X86_64~1.0-R/mingw64/bin/mingw32-make.exe -f &quot;C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Bucket.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Bucket.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Disk.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Disk.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Join.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Join.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Mem.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Mem.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Page.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Page.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Record.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/Record.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/constants.hpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/main.cpp">
+			<Option target="starter"/>
+		</Unit>
+		<Unit filename="C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

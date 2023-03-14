@@ -1,0 +1,3 @@
+C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/CMakeFiles/starter.dir
+C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Esing/Desktop/UM/2021winter/484/project/p4/starter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
